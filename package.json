@@ -1,0 +1,22 @@
+{
+    "name": "functions",
+    "scripts": {
+        "build": "tsc",
+        "serve": "npm run build && node lib/index.js",
+        "start": "node lib/index.js",
+        "service:push": "npx apollo service:push --endpoint=http://localhost:4000"
+    },
+    "main": "lib/index.js",
+    "dependencies": {
+        "apollo-server": "~2.8.0",
+        "dotenv": "~8.0.0",
+        "firebase-admin": "~8.3.0",
+        "graphql": "~14.4.2",
+        "graphql-tag": "~2.10.1"
+    },
+    "devDependencies": {
+        "@types/graphql": "^14.2.3",
+        "tslint": "~5.18.0",
+        "typescript": "~3.4.3"
+    }
+}
