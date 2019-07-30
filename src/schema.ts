@@ -13,4 +13,9 @@ export const typeDefs = gql`
     accountType: String!
     acceptTermsAndConditions: String!
   }
+
+  # Mutation
+  type Mutation {
+    createUser(uid: ID!): User
+  }
 `;

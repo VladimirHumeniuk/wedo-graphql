@@ -30,4 +30,22 @@ export const resolvers = {
       }
     }
   },
+  Mutation: {
+    createUser: async (_, args: { uid: string }) => {
+      try {
+        const userRef = admin.firestore().doc(`users/${args.uid}`)
+        let userDoc = await userRef.get()
+
+        const user = userDoc.data() as User
+
+        await userRef.update(user)
+
+        userDoc = await userRef.get()
+
+        return userDoc.data()
+      } catch (error) {
+        throw new ApolloError(error)
+      }
+    }
+  }
 };
