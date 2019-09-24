@@ -8,6 +8,10 @@ export const typeDefs = gql`
     getCompany(cid: String!): Company
   }
 
+  type Mutation {
+    assignCompany(userId: String!, companyId: String!): Boolean!
+  }
+
   # User
   type User {
     uid: ID!

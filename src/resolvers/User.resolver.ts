@@ -1,28 +1,45 @@
 import { ApolloError, ValidationError } from 'apollo-server'
 import { User } from '../models';
 import { adminService } from '../setup';
+import { tryCatchWithApolloErrorAsync } from "./../helpers/error-handler.helper";
+import { ConfigurationProvider } from '../helpers/configuration-provider.helper';
 
-
+const api = ConfigurationProvider.I.config.api;
 export const UserResolver = {
   Query: {
+
     async getAllUsers() {
-      const users = await adminService
-        .firestore()
-        .collection('users')
-        .get();
-      return users.docs.map(user => user.data()) as User[];
+      return await tryCatchWithApolloErrorAsync(async () => {
+        const users = await adminService
+          .firestore()
+          .collection(api.user)
+          .get();
+        return users.docs.map(user => user.data()) as User[];
+      })
     },
+
     async getUser(_: null, args: { uid: string }) {
-      try {
+      return await tryCatchWithApolloErrorAsync(async () => {
         const userDoc = await adminService
           .firestore()
-          .doc(`users/${args.uid}`)
+          .doc(`${api.user}/${args.uid}`)
           .get();
         const user = userDoc.data() as User | undefined;
         return user || new ValidationError('User ID not found');
-      } catch (error) {
-        throw new ApolloError(error);
-      }
+      })
+    }
+  },
+  Mutation: {
+    async assignCompany(_: null, { userId, companyId }) {
+      return await tryCatchWithApolloErrorAsync(async () => {
+        const userRef = adminService.firestore().collection(api.user).doc(userId);
+        const companyRef = adminService.firestore().collection(api.company).doc(companyId);
+
+        console.log(await userRef.set({ company: companyId }, { merge: true }))
+        console.log(await companyRef.set({ cid: companyId }, { merge: true }))
+
+        return true;
+      })
     }
   }
   // async auth(_: null, args: any) {

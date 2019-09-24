@@ -7,4 +7,7 @@ export const resolvers = {
     ...UserResolver.Query,
     ...CompanyResolver.Query
   },
+  Mutation: {
+    ...UserResolver.Mutation
+  }
 };
