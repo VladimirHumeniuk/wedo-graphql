@@ -1,8 +1,10 @@
 import { UserResolver } from "./resolvers/User.resolver";
+import { CompanyResolver } from "./resolvers/Company.resolver";
 
 
 export const resolvers = {
   Query: {
-    ...UserResolver
+    ...UserResolver.Query,
+    ...CompanyResolver.Query
   },
 };

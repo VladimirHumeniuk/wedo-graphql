@@ -2,8 +2,10 @@ import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
   type Query {
-    users: [User]
-    user(uid: String!): User
+    getAllUsers: [User]
+    getUser(uid: String!): User
+    getAllCompanies: [Company]
+    getCompany(cid: String!): Company
   }
 
   # User
@@ -12,5 +14,28 @@ export const typeDefs = gql`
     email: String!
     accountType: String!
     acceptTermsAndConditions: String!
+  }
+
+  scalar Date
+
+  # Company Card
+  type Company {
+    cid: String!
+    title: String!
+    owner: String!
+    created: Date!
+    image: String
+    url: String
+    category: String!
+    phone: PhoneNumber
+    email: String
+    address: String
+    wysiwyg: String
+    shortDescription: String!
+    isShown: Boolean!
+  }
+
+  type PhoneNumber {
+    isValid: Boolean
   }
 `;
