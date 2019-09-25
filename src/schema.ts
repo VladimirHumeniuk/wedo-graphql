@@ -6,6 +6,7 @@ export const typeDefs = gql`
     getUser(uid: String!): User
     getAllCompanies: [Company]
     getCompany(cid: String!): Company
+    getItems(type: String!, search: String, category: String): [Item]
   }
 
   type Mutation {
@@ -42,4 +43,7 @@ export const typeDefs = gql`
   type PhoneNumber {
     isValid: Boolean
   }
+
+  # Item
+  union Item = Company | User
 `;
