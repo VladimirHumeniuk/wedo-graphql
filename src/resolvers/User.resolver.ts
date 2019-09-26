@@ -2,9 +2,9 @@ import { ApolloError, ValidationError } from 'apollo-server'
 import { User } from '../models';
 import { adminService } from '../setup';
 import { tryCatchWithApolloErrorAsync } from "./../helpers/error-handler.helper";
-import { ConfigurationProvider } from '../helpers/configuration-provider.helper';
+import { api } from '../helpers/configuration-provider.helper';
 
-const api = ConfigurationProvider.I.config.api;
+
 export const UserResolver = {
   Query: {
 
@@ -12,7 +12,7 @@ export const UserResolver = {
       return await tryCatchWithApolloErrorAsync(async () => {
         const users = await adminService
           .firestore()
-          .collection(api.user)
+          .collection(api.users)
           .get();
         return users.docs.map(user => user.data()) as User[];
       })
@@ -22,7 +22,7 @@ export const UserResolver = {
       return await tryCatchWithApolloErrorAsync(async () => {
         const userDoc = await adminService
           .firestore()
-          .doc(`${api.user}/${args.uid}`)
+          .doc(`${api.users}/${args.uid}`)
           .get();
         const user = userDoc.data() as User | undefined;
         return user || new ValidationError('User ID not found');
@@ -32,11 +32,11 @@ export const UserResolver = {
   Mutation: {
     async assignCompany(_: null, { userId, companyId }) {
       return await tryCatchWithApolloErrorAsync(async () => {
-        const userRef = adminService.firestore().collection(api.user).doc(userId);
-        const companyRef = adminService.firestore().collection(api.company).doc(companyId);
+        const userRef = adminService.firestore().collection(api.users).doc(userId);
+        const companyRef = adminService.firestore().collection(api.companies).doc(companyId);
 
-        console.log(await userRef.set({ company: companyId }, { merge: true }))
-        console.log(await companyRef.set({ cid: companyId }, { merge: true }))
+        await userRef.set({ company: companyId }, { merge: true });
+        await companyRef.set({ cid: companyId }, { merge: true });
 
         return true;
       })

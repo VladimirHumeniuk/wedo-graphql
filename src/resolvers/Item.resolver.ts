@@ -28,6 +28,7 @@ export const ItemResolver = {
       });
     }
   },
+  Mutation: {},
   ItemType: {
     __resolveType(obj) {
       if(obj.uid){

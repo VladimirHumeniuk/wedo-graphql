@@ -4,13 +4,20 @@ export const typeDefs = gql`
   type Query {
     getAllUsers: [User]
     getUser(uid: String!): User
+
     getAllCompanies: [Company]
     getCompany(cid: String!): Company
+
     getItems(type: String!, search: String, category: String): [Item]
+
+    getAllAlerts: [Alert]
   }
 
   type Mutation {
     assignCompany(userId: String!, companyId: String!): Boolean!
+
+    addAlert(uid: String!, alert: AlertInput!): Boolean!
+    removeAlert(code: String!, uid: String!): Boolean!
   }
 
   # User
@@ -33,7 +40,7 @@ export const typeDefs = gql`
     url: String
     category: String!
     phone: PhoneNumber
-    email: String
+    email: String!
     address: String
     wysiwyg: String
     shortDescription: String!
@@ -42,6 +49,22 @@ export const typeDefs = gql`
 
   type PhoneNumber {
     isValid: Boolean
+  }
+
+  type Alert {
+    code: String
+    status: String
+    message: String
+    adviseUrl: String
+    closable: Boolean
+  }
+
+  input AlertInput {
+    code: String!
+    status: String!
+    message: String!
+    adviseUrl: String
+    closable: Boolean
   }
 
   # Item

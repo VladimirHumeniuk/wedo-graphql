@@ -1,5 +1,13 @@
 
 
+class Configuration {
+  public api = {
+    users: "users",
+    companies: "companies",
+    alerts: "alerts"
+  }
+}
+
 export class ConfigurationProvider {
   private static _instance: ConfigurationProvider = undefined;
 
@@ -12,9 +20,4 @@ export class ConfigurationProvider {
   }
 }
 
-class Configuration {
-  public api = {
-    user: "users",
-    company: "companies"
-  }
-}
+export const api = ConfigurationProvider.I.config.api;
