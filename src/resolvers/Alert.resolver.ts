@@ -18,18 +18,18 @@ export const AlertResolver = {
   },
   Mutation: {
     async addAlert(_: null, { uid, alert }) {
-      console.log(uid, alert);
       return await tryCatchWithApolloErrorAsync(async () => {
         await adminService
           .firestore()
           .collection(api.alerts)
           .doc(uid)
           .set({
-            [alert.code]: alert
+            code: alert.code
           }, { merge: true });
         return true;
       });
     },
+
     async removeAlert(_: null, { code, uid }) {
       return await tryCatchWithApolloErrorAsync(async () => {
         await adminService
