@@ -2,7 +2,7 @@ import { ApolloError, ValidationError } from 'apollo-server';
 import { adminService } from '../setup';
 import { tryCatchWithApolloErrorAsync } from '../helpers/error-handler.helper';
 import { api } from '../helpers/configuration-provider.helper';
-import { Alert } from '../models/Alert';
+import { Alert, AlertData } from '../models/Alert';
 
 export const AlertResolver = {
   Query: {
@@ -12,19 +12,35 @@ export const AlertResolver = {
           .firestore()
           .collection(api.alerts)
           .get();
-        return query.docs.map(alert => alert.data()) as Alert[];
+          const data = query.docs.map(alert => ({ 
+          id : alert.id,
+          alerts : Object.values(alert.data()) as Alert[]
+        })) as AlertData[];
+        console.log(data);
+        return data;
+      });
+    },
+    async getAlerts(_: null, {uid}) {
+      return await tryCatchWithApolloErrorAsync(async () => {
+        const query = await adminService
+          .firestore()
+          .doc(`${api.alerts}/${uid}`)
+          .get();
+
+        return Object.values(query.data()) as Alert[];
       });
     },
   },
   Mutation: {
     async addAlert(_: null, { uid, alert }) {
       return await tryCatchWithApolloErrorAsync(async () => {
+        const copyAlert = {...alert}
         await adminService
           .firestore()
           .collection(api.alerts)
           .doc(uid)
           .set({
-            code: alert.code
+            [copyAlert.code]: copyAlert
           }, { merge: true });
         return true;
       });

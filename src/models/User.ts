@@ -3,4 +3,5 @@ export interface User {
   email: string;
   accountType: string;
   acceptTermsAndConditions: boolean;
+  emailVerified: boolean;
 }

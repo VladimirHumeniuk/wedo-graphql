@@ -10,7 +10,8 @@ export const typeDefs = gql`
 
     getItems(type: String!, search: String, category: String): [Item]
 
-    getAllAlerts: [Alert]
+    getAllAlerts: [AlertData]
+    getAlerts(uid: String!): [Alert]
   }
 
   type Mutation {
@@ -26,6 +27,7 @@ export const typeDefs = gql`
     email: String!
     accountType: String!
     acceptTermsAndConditions: String!
+    emailVerified: Boolean
   }
 
   scalar Date
@@ -49,6 +51,11 @@ export const typeDefs = gql`
 
   type PhoneNumber {
     isValid: Boolean
+  }
+
+  type AlertData {
+    id: String
+    alerts: [Alert]
   }
 
   type Alert {
