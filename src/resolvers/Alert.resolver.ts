@@ -16,7 +16,6 @@ export const AlertResolver = {
           id : alert.id,
           alerts : Object.values(alert.data()) as Alert[]
         })) as AlertData[];
-        console.log(data);
         return data;
       });
     },

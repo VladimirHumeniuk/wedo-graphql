@@ -15,11 +15,12 @@ export const CompanyResolver = {
         return companiesQuery.docs.map(company => company.data()) as Company[];
       });
     },
-    async getCompany(_: null, args: { cid: string }) {
+    async getCompany(_: null, {cid = null}) {
+      if(!cid) return null;
       return await tryCatchWithApolloErrorAsync(async () => {
         const companyDoc = await adminService
           .firestore()
-          .doc(`${api.companies}/${args.cid}`)
+          .doc(`${api.companies}/${cid}`)
           .get();
         const company = companyDoc.data() as Company | undefined;
         return company || new ValidationError('Company ID not found');

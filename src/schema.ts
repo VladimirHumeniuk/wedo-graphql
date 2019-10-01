@@ -6,7 +6,7 @@ export const typeDefs = gql`
     getUser(uid: String!): User
 
     getAllCompanies: [Company]
-    getCompany(cid: String!): Company
+    getCompany(cid: String): Company
 
     getItems(type: String!, search: String, category: String): [Item]
 
@@ -28,6 +28,7 @@ export const typeDefs = gql`
     accountType: String!
     acceptTermsAndConditions: String!
     emailVerified: Boolean
+    company: String
   }
 
   scalar Date
@@ -41,16 +42,12 @@ export const typeDefs = gql`
     image: String
     url: String
     category: String!
-    phone: PhoneNumber
+    phone: String!
     email: String!
     address: String
     wysiwyg: String
     shortDescription: String!
     isShown: Boolean!
-  }
-
-  type PhoneNumber {
-    isValid: Boolean
   }
 
   type AlertData {
