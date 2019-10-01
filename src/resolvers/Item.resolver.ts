@@ -2,22 +2,23 @@
 import { adminService } from '../setup';
 import { tryCatchWithApolloErrorAsync } from '../helpers/error-handler.helper';
 import { Item } from '../models/Item';
+import { Query, CollectionReference } from '@google-cloud/firestore';
 
 export const ItemResolver = {
   Query: {
     async getItems(_: null, { type, search, category }) {
-
+      const collection = type.toLowerCase();
       return await tryCatchWithApolloErrorAsync(async () => {
-        const query = adminService
+        let query: CollectionReference | Query = adminService
           .firestore()
-          .collection(type)
+          .collection(collection)
 
         if (category && category !== 'All') {
-          query.where('category', '==', category)
+          query = query.where('category', '==', category);
         }
 
         if (search) {
-          query.orderBy('title')
+          query = query.orderBy('title')
             .startAt(search)
             .endAt(search + '\uf8ff')
         }
