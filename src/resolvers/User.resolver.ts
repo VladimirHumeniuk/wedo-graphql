@@ -27,7 +27,7 @@ export const UserResolver = {
         const user = userDoc.data() as User | undefined;
         return user || new ValidationError('User ID not found');
       })
-    }
+    },
   },
   Mutation: {
     async assignCompany(_: null, { userId, companyId }) {
@@ -38,6 +38,18 @@ export const UserResolver = {
         await userRef.set({ company: companyId }, { merge: true });
         await companyRef.set({ cid: companyId }, { merge: true });
 
+        return true;
+      })
+    },
+    async removeUser(_: null, { uid }) {
+      return await tryCatchWithApolloErrorAsync(async () => {
+        const userDoc = await adminService
+          .firestore()
+          .doc(`${api.users}/${uid}`)
+          .get();
+
+        adminService.auth().deleteUser(uid);
+        userDoc.ref.delete();
         return true;
       })
     }

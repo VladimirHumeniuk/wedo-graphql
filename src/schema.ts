@@ -19,6 +19,8 @@ export const typeDefs = gql`
 
     addAlert(uid: String!, alert: AlertInput!): Boolean!
     removeAlert(code: String!, uid: String!): Boolean!
+
+    removeUser(uid: String!): Boolean!
   }
 
   # User
