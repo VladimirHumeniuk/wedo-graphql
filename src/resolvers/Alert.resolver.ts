@@ -26,7 +26,8 @@ export const AlertResolver = {
           .doc(`${api.alerts}/${uid}`)
           .get();
 
-        return Object.values(query.data()) as Alert[];
+        const data = query.data();
+        return data && Object.values(data) || [] as Alert[];
       });
     },
   },
