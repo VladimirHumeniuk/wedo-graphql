@@ -1,6 +1,6 @@
 import { ValidationError } from 'apollo-server';
 import { adminService } from '../setup';
-import { Company } from '../models/Company';
+import { Company } from '../models';
 import { tryCatchWithApolloErrorAsync } from '../helpers/error-handler.helper';
 import { api } from '../helpers/configuration-provider.helper';
 

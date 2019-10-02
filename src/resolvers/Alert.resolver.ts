@@ -2,7 +2,7 @@ import { ApolloError, ValidationError } from 'apollo-server';
 import { adminService } from '../setup';
 import { tryCatchWithApolloErrorAsync } from '../helpers/error-handler.helper';
 import { api } from '../helpers/configuration-provider.helper';
-import { Alert, AlertData } from '../models/Alert';
+import { Alert, AlertData } from '../models';
 
 export const AlertResolver = {
   Query: {
@@ -12,7 +12,7 @@ export const AlertResolver = {
           .firestore()
           .collection(api.alerts)
           .get();
-          const data = query.docs.map(alert => ({ 
+          const data = query.docs.map(alert => ({
           id : alert.id,
           alerts : Object.values(alert.data()) as Alert[]
         })) as AlertData[];

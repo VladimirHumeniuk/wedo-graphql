@@ -1,7 +1,7 @@
 
 import { adminService } from '../setup';
 import { tryCatchWithApolloErrorAsync } from '../helpers/error-handler.helper';
-import { Item } from '../models/Item';
+import { Item } from '../models';
 import { Query, CollectionReference } from '@google-cloud/firestore';
 
 export const ItemResolver = {
@@ -35,7 +35,7 @@ export const ItemResolver = {
       if(obj.uid){
         return 'User';
       }
-  
+
       if(obj.cid){
         return 'Company';
       }
