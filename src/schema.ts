@@ -23,6 +23,13 @@ export const typeDefs = gql`
     removeUser(uid: String!): Boolean!
   }
 
+  # Roles
+  type Roles {
+    readonly: Boolean!
+    author: Boolean
+    admin: Boolean
+  }
+
   # User
   type User {
     uid: ID!
@@ -31,6 +38,7 @@ export const typeDefs = gql`
     acceptTermsAndConditions: String!
     emailVerified: Boolean
     company: String
+    roles: Roles!
   }
 
   scalar Date

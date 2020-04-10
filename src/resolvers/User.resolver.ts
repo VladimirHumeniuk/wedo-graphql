@@ -54,12 +54,4 @@ export const UserResolver = {
       })
     }
   }
-  // async auth(_: null, args: any) {
-  //   try {
-  //     const auth = await admin.auth;
-  //     return auth;
-  //   } catch(error) {
-  //     throw new ApolloError(error)
-  //   }
-  // }
 }
