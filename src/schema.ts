@@ -38,6 +38,7 @@ export const typeDefs = gql`
     acceptTermsAndConditions: String!
     emailVerified: Boolean
     company: String
+    createdAt: Date
     roles: Roles!
   }
 
