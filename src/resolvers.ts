@@ -2,12 +2,14 @@ import { UserResolver } from "./resolvers/User.resolver";
 import { CompanyResolver } from "./resolvers/Company.resolver";
 import { ItemResolver } from "./resolvers/Item.resolver";
 import { AlertResolver } from "./resolvers/Alert.resolver";
+import { CategoryResolver } from "./resolvers/Category.resolver";
 
 const resolverItems = [
   UserResolver,
   CompanyResolver,
   ItemResolver,
-  AlertResolver
+  AlertResolver,
+  CategoryResolver
 ]
 export const resolvers = {
   Query: {
@@ -21,7 +23,7 @@ export const resolvers = {
       if(obj.uid){
         return 'User';
       }
-  
+
       if(obj.cid){
         return 'Company';
       }

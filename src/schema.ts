@@ -12,6 +12,9 @@ export const typeDefs = gql`
 
     getAllAlerts: [AlertData]
     getAlerts(uid: String!): [Alert]
+
+    getAllCategories: [Category]
+    getCategory(id: Int): Category
   }
 
   type Mutation {
@@ -61,6 +64,7 @@ export const typeDefs = gql`
     isShown: Boolean!
   }
 
+  # Alerts
   type AlertData {
     id: String
     alerts: [Alert]
@@ -80,6 +84,12 @@ export const typeDefs = gql`
     message: String!
     adviseUrl: String
     closable: Boolean
+  }
+
+  # Categories
+  type Category {
+    id: Int,
+    title: String
   }
 
   # Item

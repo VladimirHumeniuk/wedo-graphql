@@ -4,7 +4,8 @@ class Configuration {
   public api = {
     users: 'users',
     companies: 'companies',
-    alerts: 'alerts'
+    alerts: 'alerts',
+    categories: 'categories'
   }
 }
 
