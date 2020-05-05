@@ -8,7 +8,7 @@ export const typeDefs = gql`
     getAllCompanies: [Company]
     getCompany(cid: String): Company
 
-    getItems(type: String!, search: String, category: String): [Item]
+    getItems(type: String!, search: String, category: Int): [Item]
 
     getAllAlerts: [AlertData]
     getAlerts(uid: String!): [Alert]
@@ -24,6 +24,9 @@ export const typeDefs = gql`
     removeAlert(code: String!, uid: String!): Boolean!
 
     removeUser(uid: String!): Boolean!
+
+    addCategory(category: CategoryInput!): Boolean!
+    removeCategory(id: Int!): Boolean!
   }
 
   # Roles
@@ -55,7 +58,7 @@ export const typeDefs = gql`
     created: Date!
     image: String
     url: String
-    category: String!
+    category: Int!
     phone: String!
     email: String!
     address: String
@@ -88,8 +91,13 @@ export const typeDefs = gql`
 
   # Categories
   type Category {
-    id: Int,
+    id: Int
     title: String
+  }
+
+  input CategoryInput {
+    id: Int!
+    title: String!
   }
 
   # Item

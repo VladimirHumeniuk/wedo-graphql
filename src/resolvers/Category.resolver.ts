@@ -12,6 +12,7 @@ export const CategoryResolver = {
         const categories = await adminService
           .firestore()
           .collection(api.categories)
+          .orderBy('title')
           .get();
         return categories.docs.map(category => category.data()) as Category[];
       })
@@ -28,5 +29,27 @@ export const CategoryResolver = {
       })
     },
   },
-  Mutation: {}
+  Mutation: {
+    async addCategory(_: null, { category }) {
+      return await tryCatchWithApolloErrorAsync(async () => {
+        await adminService
+          .firestore()
+          .collection(api.categories)
+          .doc(`${category.id}`)
+          .set(category, { merge: true });
+        return true;
+      });
+    },
+    async removeCategory(_: null, { id }) {
+      return await tryCatchWithApolloErrorAsync(async () => {
+        await adminService
+          .firestore()
+          .collection(api.categories)
+          .doc(`${id}`)
+          .delete()
+
+        return true;
+      });
+    }
+  }
 }
