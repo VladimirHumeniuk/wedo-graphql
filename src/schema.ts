@@ -8,10 +8,13 @@ export const typeDefs = gql`
     getAllCompanies: [Company]
     getCompany(cid: String): Company
 
-    getItems(type: String!, search: String, category: String): [Item]
+    getItems(type: String!, search: String, category: Int): [Item]
 
     getAllAlerts: [AlertData]
     getAlerts(uid: String!): [Alert]
+
+    getAllCategories: [Category]
+    getCategory(id: Int): Category
   }
 
   type Mutation {
@@ -21,6 +24,9 @@ export const typeDefs = gql`
     removeAlert(code: String!, uid: String!): Boolean!
 
     removeUser(uid: String!): Boolean!
+
+    addCategory(category: CategoryInput!): Boolean!
+    removeCategory(id: Int!): Boolean!
   }
 
   # Roles
@@ -52,7 +58,7 @@ export const typeDefs = gql`
     created: Date!
     image: String
     url: String
-    category: String!
+    category: Int!
     phone: String!
     email: String!
     address: String
@@ -61,6 +67,7 @@ export const typeDefs = gql`
     isShown: Boolean!
   }
 
+  # Alerts
   type AlertData {
     id: String
     alerts: [Alert]
@@ -80,6 +87,17 @@ export const typeDefs = gql`
     message: String!
     adviseUrl: String
     closable: Boolean
+  }
+
+  # Categories
+  type Category {
+    id: Int
+    title: String
+  }
+
+  input CategoryInput {
+    id: Int!
+    title: String!
   }
 
   # Item

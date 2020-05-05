@@ -13,7 +13,7 @@ export const ItemResolver = {
           .firestore()
           .collection(collection)
 
-        if (category && category !== 'All') {
+        if (category) {
           query = query.where('category', '==', category);
         }
 

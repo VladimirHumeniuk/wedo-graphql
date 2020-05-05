@@ -1,3 +1,5 @@
+import { Category } from "./Category";
+
 export interface Company {
   cid: string;
   title: string;
@@ -6,7 +8,7 @@ export interface Company {
   image: string;
   url: string;
   phone: PhoneNumber;
-  category: string;
+  category: Category;
   email: string;
   address: string;
   wysiwyg: string;
