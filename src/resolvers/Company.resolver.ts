@@ -27,5 +27,17 @@ export const CompanyResolver = {
       });
     }
   },
-  Mutation: {}
+  Mutation: {
+    async removeCompany(_: null, { cid }) {
+      return await tryCatchWithApolloErrorAsync(async () => {
+        await adminService
+          .firestore()
+          .collection(api.companies)
+          .doc(`${cid}`)
+          .delete()
+
+        return true;
+      });
+    }
+  }
 }

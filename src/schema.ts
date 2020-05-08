@@ -19,6 +19,7 @@ export const typeDefs = gql`
 
   type Mutation {
     assignCompany(userId: String!, companyId: String!): Boolean!
+    removeCompany(cid: String!): Boolean!
 
     addAlert(uid: String!, alert: AlertInput!): Boolean!
     removeAlert(code: String!, uid: String!): Boolean!

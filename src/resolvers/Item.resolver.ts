@@ -12,6 +12,8 @@ export const ItemResolver = {
         let query: CollectionReference | Query = adminService
           .firestore()
           .collection(collection)
+          .where('isShown', '==', true)
+          .orderBy('created')
 
         if (category) {
           query = query.where('category', '==', category);
