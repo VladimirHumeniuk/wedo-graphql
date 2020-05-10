@@ -28,6 +28,17 @@ export const CompanyResolver = {
     }
   },
   Mutation: {
+    async assignCompany(_: null, { userId, companyId }) {
+      return await tryCatchWithApolloErrorAsync(async () => {
+        const userRef = adminService.firestore().collection(api.users).doc(userId);
+        const companyRef = adminService.firestore().collection(api.companies).doc(companyId);
+
+        await userRef.set({ company: companyId }, { merge: true });
+        await companyRef.set({ cid: companyId }, { merge: true });
+
+        return true;
+      })
+    },
     async removeCompany(_: null, { cid }) {
       return await tryCatchWithApolloErrorAsync(async () => {
         await adminService

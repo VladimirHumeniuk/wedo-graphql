@@ -7,13 +7,16 @@ import { api } from '../helpers/configuration-provider.helper';
 
 export const UserResolver = {
   Query: {
-
-    async getAllUsers() {
+    async getAllUsers(_: null, { lastVisible, limit }) {
       return await tryCatchWithApolloErrorAsync(async () => {
         const users = await adminService
           .firestore()
           .collection(api.users)
+          .orderBy('createdAt')
+          .startAfter(lastVisible ? lastVisible : 1)
+          .limit(limit ? limit : 0)
           .get();
+
         return users.docs.map(user => user.data()) as User[];
       })
     },
@@ -30,17 +33,6 @@ export const UserResolver = {
     },
   },
   Mutation: {
-    async assignCompany(_: null, { userId, companyId }) {
-      return await tryCatchWithApolloErrorAsync(async () => {
-        const userRef = adminService.firestore().collection(api.users).doc(userId);
-        const companyRef = adminService.firestore().collection(api.companies).doc(companyId);
-
-        await userRef.set({ company: companyId }, { merge: true });
-        await companyRef.set({ cid: companyId }, { merge: true });
-
-        return true;
-      })
-    },
     async removeUser(_: null, { uid }) {
       return await tryCatchWithApolloErrorAsync(async () => {
         const userDoc = await adminService

@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
   type Query {
-    getAllUsers: [User]
+    getAllUsers(lastVisible: Int, limit: Int): [User]
     getUser(uid: String!): User
 
     getAllCompanies: [Company]
