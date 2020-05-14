@@ -40,6 +40,7 @@ export const typeDefs = gql`
   # User
   type User {
     uid: ID!
+    username: String
     email: String!
     accountType: String!
     acceptTermsAndConditions: String!
@@ -59,6 +60,7 @@ export const typeDefs = gql`
     created: Date!
     image: String
     url: String
+    comments: [Comment]
     category: Int!
     phone: String!
     email: String!
@@ -66,6 +68,14 @@ export const typeDefs = gql`
     wysiwyg: String
     shortDescription: String!
     isShown: Boolean!
+  }
+
+  # Comments
+  type Comment {
+    date: Date!
+    text: String!
+    author: String!
+    isEdited: Boolean!
   }
 
   # Alerts

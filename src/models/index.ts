@@ -5,3 +5,4 @@ export * from './Item';
 export * from './Roles';
 export * from './Timestamp';
 export * from './Category';
+export * from './Comment';

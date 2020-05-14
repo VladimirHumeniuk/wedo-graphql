@@ -5,6 +5,7 @@ export interface Company {
   title: string;
   owner: string;
   created: Date;
+  comments?: Comment[];
   image: string;
   url: string;
   phone: PhoneNumber;
