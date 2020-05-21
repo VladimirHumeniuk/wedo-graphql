@@ -68,14 +68,29 @@ export const typeDefs = gql`
     wysiwyg: String
     shortDescription: String!
     isShown: Boolean!
+    rating: Float
   }
 
   # Comments
   type Comment {
-    date: Date!
-    text: String!
-    author: String!
-    isEdited: Boolean!
+    id: String
+    date: Date
+    text: String
+    author: CommentAuthor
+    isEdited: Boolean
+    rating: Int
+    answer: Answer
+  }
+
+  type Answer {
+    date: Date
+    text: String
+    isEdited: Boolean
+  }
+
+  type CommentAuthor {
+    uid: String!
+    username: String!
   }
 
   # Alerts

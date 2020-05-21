@@ -15,6 +15,7 @@ export interface Company {
   wysiwyg: string;
   shortDescription: string;
   isShown: boolean;
+  rating?: number;
 }
 
 export interface PhoneNumber {

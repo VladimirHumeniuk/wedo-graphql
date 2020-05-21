@@ -1,8 +1,18 @@
-import { Timestamp } from '.';
+interface Answer {
+  date?: any
+  text?: String
+  isEdited?: Boolean
+}
 
 export interface Comment {
-  date: Timestamp | Date;
-  text: string;
-  author: string;
-  isEdited: boolean;
+  id?: string;
+  date?: any;
+  text?: string;
+  author?: {
+    uid: string;
+    username: string;
+  };
+  isEdited?: boolean;
+  rating?: number;
+  answer?: Answer
 }
