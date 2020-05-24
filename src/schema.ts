@@ -19,7 +19,7 @@ export const typeDefs = gql`
 
     getCompanyComments(cid: String!): [Comment]
     getCompanyStars(cid: String!): [Star]
-
+    getUserStars(uid: String!): [Star]
   }
 
   type Mutation {

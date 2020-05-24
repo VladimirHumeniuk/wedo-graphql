@@ -7,7 +7,13 @@ export const StarResolver = new class {
     Query = {
       getCompanyStars: async (_: null, {cid}) => {
         return await tryCatchWithApolloErrorAsync(async() => {
-          return this.starService.getAllEntities(cid);
+          return this.starService.getCompanyStars(cid);
+        });
+      },
+
+      getUserStars: async (_: null, {uid}) => {
+        return await tryCatchWithApolloErrorAsync(async() => {
+          return this.starService.getCompanyStars(uid);
         });
       }
     };

@@ -6,9 +6,18 @@ import { Singleton } from '../../decorators/singleton';
 export class StarService {
     private readonly starRepository: StarRepository = new StarRepository();
 
-    async getAllEntities(companyId: string): Promise<Star[]> {
+    async getCompanyStars(companyId: string): Promise<Star[]> {
         const query = this.starRepository.getAllEntities()
             .where('cid', '==', companyId);
+
+        const starSnapshots = await query.get();
+        const stars = starSnapshots.docs.map(star =>  star.data()) as Star[];
+        return stars;
+    }
+
+    async getUserStars(userId: string): Promise<Star[]> {
+        const query = this.starRepository.getAllEntities()
+            .where('uid', '==', userId);
 
         const starSnapshots = await query.get();
         const stars = starSnapshots.docs.map(star =>  star.data()) as Star[];
