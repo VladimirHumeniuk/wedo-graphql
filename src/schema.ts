@@ -7,6 +7,7 @@ export const typeDefs = gql`
 
     getAllCompanies: [Company]
     getCompany(cid: String): Company
+    getCompanyByTitle(title: String): Company
 
     getItems(type: String!, search: String, category: Int): [Item]
 
@@ -15,6 +16,10 @@ export const typeDefs = gql`
 
     getAllCategories: [Category]
     getCategory(id: Int): Category
+
+    getCompanyComments(cid: String!): [Comment]
+    getCompanyStars(cid: String!): [Star]
+
   }
 
   type Mutation {
@@ -80,6 +85,7 @@ export const typeDefs = gql`
     isEdited: Boolean
     rating: Int
     answer: Answer
+    votes: [Vote]
   }
 
   type Answer {
@@ -91,6 +97,10 @@ export const typeDefs = gql`
   type CommentAuthor {
     uid: String!
     username: String!
+  }
+
+  type Vote {
+    value: Boolean
   }
 
   # Alerts
@@ -124,6 +134,13 @@ export const typeDefs = gql`
   input CategoryInput {
     id: Int!
     title: String!
+  }
+
+  # Star
+  type Star {
+    cid: String!
+    uid: String!
+    value: Int
   }
 
   # Item
