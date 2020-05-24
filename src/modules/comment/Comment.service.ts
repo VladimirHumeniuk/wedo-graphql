@@ -23,6 +23,7 @@ export class CommentService {
             comment.votes = votes;
         }
 
+        comments.sort(this.sortCommentsByPositiveVotes);
         return comments;
     }
 
@@ -31,5 +32,18 @@ export class CommentService {
         const commentSnapshot = await query.get();
         const comment = commentSnapshot.data() as Comment | undefined;
         return comment;
+    }
+
+    private sortCommentsByPositiveVotes(a: Comment, b: Comment) {
+        const positiveVotesA = a.votes.filter(vote => vote.value === true);
+        const positiveVotesB = b.votes.filter(vote => vote.value === true);
+
+        if (positiveVotesA.length < positiveVotesB.length) {
+            return 1;
+        } else if (positiveVotesA.length > positiveVotesB.length) {
+            return -1
+        } else {
+            return 0;
+        }
     }
 }
