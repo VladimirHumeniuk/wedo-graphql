@@ -1,3 +1,5 @@
+import { Vote } from '../vote/Vote';
+
 interface Answer {
   date?: any
   text?: String
@@ -14,5 +16,6 @@ export interface Comment {
   };
   isEdited?: boolean;
   rating?: number;
-  answer?: Answer
+  answer?: Answer;
+  votes: Vote[];
 }

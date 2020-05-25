@@ -1,4 +1,3 @@
-
 import { adminService } from '../setup';
 import { tryCatchWithApolloErrorAsync } from '../helpers/error-handler.helper';
 import { Item } from '../models';
@@ -34,11 +33,11 @@ export const ItemResolver = {
   Mutation: {},
   ItemType: {
     __resolveType(obj) {
-      if(obj.uid){
+      if (obj.uid) {
         return 'User';
       }
 
-      if(obj.cid){
+      if (obj.cid) {
         return 'Company';
       }
     }
