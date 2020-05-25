@@ -5,19 +5,19 @@ import { api } from '../../helpers/configuration-provider.helper';
 @Singleton
 export class CompanyRepository {
 
-    getAllEntities(): FirebaseFirestore.CollectionReference {
-        const query = adminService
-            .firestore()
-            .collection(api.companies);
+  getAllEntities(): FirebaseFirestore.CollectionReference {
+    const query = adminService
+      .firestore()
+      .collection(api.companies);
 
-        return query;
-    }
+    return query;
+  }
 
-    getEnitity(cid: string): FirebaseFirestore.DocumentReference {
-        const query = this
-            .getAllEntities()
-            .doc(cid);
+  getEnitity(cid: string): FirebaseFirestore.DocumentReference {
+    const query = this
+      .getAllEntities()
+      .doc(cid);
 
-        return query;
-    }
+    return query;
+  }
 }

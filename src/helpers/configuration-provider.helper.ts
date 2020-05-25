@@ -1,5 +1,3 @@
-
-
 class Configuration {
   public api = {
     users: 'users',

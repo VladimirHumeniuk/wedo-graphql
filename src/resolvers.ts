@@ -1,9 +1,9 @@
-import { UserResolver } from "./resolvers/User.resolver";
-import { ItemResolver } from "./resolvers/Item.resolver";
-import { AlertResolver } from "./resolvers/Alert.resolver";
-import { CategoryResolver } from "./resolvers/Category.resolver";
+import { UserResolver } from './resolvers/User.resolver';
+import { ItemResolver } from './resolvers/Item.resolver';
+import { AlertResolver } from './resolvers/Alert.resolver';
+import { CategoryResolver } from './resolvers/Category.resolver';
 
-import { CompanyResolver } from "./modules/company/Company.resolver";
+import { CompanyResolver } from './modules/company/Company.resolver';
 import { CommentResolver } from './modules/comment/Comment.resolver';
 import { StarResolver } from './modules/star/Star.resolver';
 

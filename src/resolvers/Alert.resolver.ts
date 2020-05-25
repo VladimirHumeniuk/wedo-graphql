@@ -11,14 +11,14 @@ export const AlertResolver = {
           .firestore()
           .collection(api.alerts)
           .get();
-          const data = query.docs.map(alert => ({
-          id : alert.id,
-          alerts : Object.values(alert.data()) as Alert[]
+        const data = query.docs.map(alert => ({
+          id: alert.id,
+          alerts: Object.values(alert.data()) as Alert[]
         })) as AlertData[];
         return data;
       });
     },
-    async getAlerts(_: null, {uid}) {
+    async getAlerts(_: null, { uid }) {
       return await tryCatchWithApolloErrorAsync(async () => {
         const query = await adminService
           .firestore()
@@ -33,7 +33,7 @@ export const AlertResolver = {
   Mutation: {
     async addAlert(_: null, { uid, alert }) {
       return await tryCatchWithApolloErrorAsync(async () => {
-        const copyAlert = {...alert}
+        const copyAlert = { ...alert }
         await adminService
           .firestore()
           .collection(api.alerts)

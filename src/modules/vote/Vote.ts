@@ -1,3 +1,3 @@
 export interface Vote {
-    value?: boolean;
+  value?: boolean;
 }

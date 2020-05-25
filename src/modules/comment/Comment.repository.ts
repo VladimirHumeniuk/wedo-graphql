@@ -6,21 +6,21 @@ import { CompanyRepository } from '../company/Company.repository';
 @Singleton
 export class CommentRepository {
 
-    private readonly companyRepository: CompanyRepository = new CompanyRepository();
+  private readonly companyRepository: CompanyRepository = new CompanyRepository();
 
-    getAllEntities(companyId: string): FirebaseFirestore.CollectionReference {
-        const query = this.companyRepository
-            .getEnitity(companyId)
-            .collection(`${api.comments}`);
+  getAllEntities(companyId: string): FirebaseFirestore.CollectionReference {
+    const query = this.companyRepository
+      .getEnitity(companyId)
+      .collection(`${api.comments}`);
 
-        return query
-    }
+    return query
+  }
 
-    getEnitity(companyId: string, commentId: string): FirebaseFirestore.DocumentReference  {
-        const query = this
-            .getAllEntities(companyId)
-            .doc(commentId);
+  getEnitity(companyId: string, commentId: string): FirebaseFirestore.DocumentReference {
+    const query = this
+      .getAllEntities(companyId)
+      .doc(commentId);
 
-        return query;
-    }
+    return query;
+  }
 }

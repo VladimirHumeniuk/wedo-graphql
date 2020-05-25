@@ -15,9 +15,9 @@ export const CompanyResolver = new class {
         return companiesQuery.docs.map(company => company.data()) as Company[];
       });
     },
-    
-    async getCompany(_: null, {cid = null}) {
-      if(!cid) return null;
+
+    async getCompany(_: null, { cid = null }) {
+      if (!cid) return null;
       return await tryCatchWithApolloErrorAsync(async () => {
         const companyDoc = await adminService
           .firestore()
