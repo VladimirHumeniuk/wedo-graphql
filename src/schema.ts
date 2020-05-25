@@ -33,6 +33,10 @@ export const typeDefs = gql`
 
     addCategory(category: CategoryInput!): Boolean!
     removeCategory(id: Int!): Boolean!
+    setStar(star: StarInput!): Boolean!
+
+    setComment(companyId: String!, comment: CommentInput!): Boolean!
+    addComment(companyId: String!, comment: CommentInput!): Boolean!
   }
 
   # Roles
@@ -88,13 +92,34 @@ export const typeDefs = gql`
     votes: [Vote]
   }
 
+  input CommentInput {
+    id: String
+    date: Date
+    text: String
+    author: CommentAuthorInput
+    isEdited: Boolean
+    rating: Int
+    answer: AnswerInput
+  }
+
   type Answer {
     date: Date
     text: String
     isEdited: Boolean
   }
 
+  input AnswerInput {
+    date: Date
+    text: String
+    isEdited: Boolean
+  }
+
   type CommentAuthor {
+    uid: String!
+    username: String!
+  }
+
+  input CommentAuthorInput {
     uid: String!
     username: String!
   }
@@ -141,6 +166,12 @@ export const typeDefs = gql`
     cid: String!
     uid: String!
     value: Int
+  }
+
+  input StarInput {
+    cid: String!
+    uid: String!
+    value: Int!
   }
 
   # Item

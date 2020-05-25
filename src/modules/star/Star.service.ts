@@ -1,6 +1,7 @@
 import { Star } from './Star';
 import { StarRepository } from './Star.repository';
 import { Singleton } from '../../decorators/singleton';
+import { ObjectHelper } from '../../helpers/object.helper';
 
 @Singleton
 export class StarService {
@@ -22,5 +23,18 @@ export class StarService {
         const starSnapshots = await query.get();
         const stars = starSnapshots.docs.map(star =>  star.data()) as Star[];
         return stars;
+    }
+
+    async setStar(star: Star): Promise<boolean> {
+        const {
+            uid,
+            cid,
+        } = star;
+        const query = this.starRepository.getAllEntities()
+            .doc(`${uid}_${cid}`)
+
+        const starToSave = ObjectHelper.convertToPlainObject(star);
+        await query.set(starToSave, { merge: true });
+        return true;
     }
 }

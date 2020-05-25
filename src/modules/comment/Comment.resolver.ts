@@ -12,5 +12,17 @@ export const CommentResolver = new class {
       }
     };
   
-    Mutation = {};
+    Mutation = {
+      addComment: async (_: null, {companyId, comment}) => {
+        return await tryCatchWithApolloErrorAsync(async() => {
+          return this.commentService.addComment(companyId, comment);
+        });
+      },
+
+      setComment: async (_: null, {companyId, comment}) => {
+        return await tryCatchWithApolloErrorAsync(async() => {
+          return this.commentService.setComment(companyId, comment);
+        });
+      }
+    };
 }();

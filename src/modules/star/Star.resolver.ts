@@ -18,5 +18,11 @@ export const StarResolver = new class {
       }
     };
   
-    Mutation = {};
+    Mutation = {
+      setStar: async (_: null, {star}) => {
+        return await tryCatchWithApolloErrorAsync(async() => {
+          return this.starService.setStar(star);
+        });
+      }
+    };
 }();
