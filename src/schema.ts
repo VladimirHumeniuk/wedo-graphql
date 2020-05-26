@@ -37,6 +37,9 @@ export const typeDefs = gql`
 
     setComment(companyId: String!, comment: CommentInput!): Boolean!
     addComment(companyId: String!, comment: CommentInput!): Boolean!
+    removeComment(companyId: String!, commentId: String!): Boolean!
+
+    setVote(companyId: String!, commentId: String!, vote: VoteInput!): Boolean!
   }
 
   # Roles
@@ -124,10 +127,17 @@ export const typeDefs = gql`
     username: String!
   }
 
+  # Vote
   type Vote {
+    id: String
     value: Boolean
   }
 
+  input VoteInput {
+    id: String
+    value: Boolean
+  }
+ 
   # Alerts
   type AlertData {
     id: String

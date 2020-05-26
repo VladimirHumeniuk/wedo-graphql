@@ -6,6 +6,7 @@ import { CategoryResolver } from './resolvers/Category.resolver';
 import { CompanyResolver } from './modules/company/Company.resolver';
 import { CommentResolver } from './modules/comment/Comment.resolver';
 import { StarResolver } from './modules/star/Star.resolver';
+import { VoteResolver } from './modules/vote/Vote.resolver';
 
 const resolverItems = [
   UserResolver,
@@ -15,6 +16,7 @@ const resolverItems = [
   CategoryResolver,
   CommentResolver,
   StarResolver,
+  VoteResolver,
 ]
 export const resolvers = {
   Query: {
