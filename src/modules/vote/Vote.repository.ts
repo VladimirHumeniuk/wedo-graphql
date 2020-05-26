@@ -14,4 +14,12 @@ export class VoteRepository {
 
         return query
     }
+
+    getEnitity(companyId: string, commentId: string, voteId: string): FirebaseFirestore.DocumentReference  {
+        const query = this
+            .getAllEntities(companyId, commentId)
+            .doc(voteId);
+
+        return query;
+    }
 }
