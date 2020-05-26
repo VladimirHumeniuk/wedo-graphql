@@ -23,6 +23,12 @@ export const CommentResolver = new class {
       return await tryCatchWithApolloErrorAsync(async () => {
         return this.commentService.setComment(companyId, comment);
       });
+    },
+
+    removeComment: async (_: null, { companyId, commentId }) => {
+      return await tryCatchWithApolloErrorAsync(async() => {
+        return this.commentService.removeComment(companyId, commentId);
+      });
     }
   };
 }();
