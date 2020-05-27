@@ -1,7 +1,7 @@
 import { UserResolver } from './resolvers/User.resolver';
-import { ItemResolver } from './resolvers/Item.resolver';
 import { AlertResolver } from './resolvers/Alert.resolver';
 import { CategoryResolver } from './resolvers/Category.resolver';
+import { AlgoliaResolver } from './resolvers/Algolia.resolver';
 
 import { CompanyResolver } from './modules/company/Company.resolver';
 import { CommentResolver } from './modules/comment/Comment.resolver';
@@ -9,9 +9,9 @@ import { StarResolver } from './modules/star/Star.resolver';
 import { VoteResolver } from './modules/vote/Vote.resolver';
 
 const resolverItems = [
+  AlgoliaResolver,
   UserResolver,
   CompanyResolver,
-  ItemResolver,
   AlertResolver,
   CategoryResolver,
   CommentResolver,
@@ -25,14 +25,10 @@ export const resolvers = {
   Mutation: {
     ...Object.assign({}, ...resolverItems.map(x => x.Mutation))
   },
-  Item: {
+  SearchItem: {
     __resolveType(obj) {
-      if(obj.uid){
-        return 'User';
-      }
-
-      if(obj.cid){
-        return 'Company';
+      if(obj.objectID && obj.category){
+        return 'CompanyPreview';
       }
     }
   }
