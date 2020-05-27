@@ -5,11 +5,11 @@ export const typeDefs = gql`
     getAllUsers(lastVisible: Int, limit: Int): [User]
     getUser(uid: String!): User
 
+    indexSearch(collection: String!, query: String, filters: String, page: Int): [SearchItem]
+
     getAllCompanies: [Company]
     getCompany(cid: String): Company
     getCompanyByTitle(title: String): Company
-
-    getItems(type: String!, search: String, category: Int): [Item]
 
     getAllAlerts: [AlertData]
     getAlerts(uid: String!): [Alert]
@@ -83,6 +83,15 @@ export const typeDefs = gql`
     rating: Float
   }
 
+  type CompanyPreview {
+    objectID: String!
+    title: String!
+    image: String
+    category: Int!
+    shortDescription: String!
+    rating: Int
+  }
+
   # Comments
   type Comment {
     id: String
@@ -137,7 +146,7 @@ export const typeDefs = gql`
     id: String
     value: Boolean
   }
- 
+
   # Alerts
   type AlertData {
     id: String
@@ -184,6 +193,6 @@ export const typeDefs = gql`
     value: Int!
   }
 
-  # Item
-  union Item = Company | User
+  # Search Results
+  union SearchItem = CompanyPreview
 `;

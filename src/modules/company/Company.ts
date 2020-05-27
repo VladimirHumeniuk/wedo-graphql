@@ -1,20 +1,27 @@
-import { Category } from '../../models/Category';
-
 export interface Company {
   cid: string;
   title: string;
   owner: string;
   created: Date;
   comments?: Comment[];
-  image: string;
+  image?: string;
   url: string;
   phone: PhoneNumber;
-  category: Category;
+  category: number;
   email: string;
   address: string;
   wysiwyg: string;
   shortDescription: string;
   isShown: boolean;
+  rating?: number;
+}
+
+export interface CompanyPreview {
+  cid: string;
+  title: string;
+  image?: string;
+  category: number;
+  shortDescription: string;
   rating?: number;
 }
 
