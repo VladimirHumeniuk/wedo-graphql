@@ -6,13 +6,19 @@ import { algClient } from '../setup';
 
 export const AlgoliaResolver = {
   Query: {
-    async indexSearch(_: null, { collection, query = '', filters = undefined, page = 0 }) {
+    async indexSearch(_: null, {
+      collection,
+      hitsPerPage,
+      query = '',
+      filters = undefined,
+      page = 0
+    }) {
       const algIndex: SearchIndex = algClient.initIndex(collection);
 
       return await tryCatchWithApolloErrorAsync(async () => {
         const searchResults = algIndex.search(query, {
           page: page,
-          hitsPerPage: 16,
+          hitsPerPage: hitsPerPage,
           filters: filters
         })
 
