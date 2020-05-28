@@ -195,9 +195,9 @@ export const typeDefs = gql`
 
   # Search Results
   type SearchResult {
-    total: Int!,
+    total: Int!
     hits: [SearchItem]
   }
-
+  
   union SearchItem = CompanyPreview
 `;

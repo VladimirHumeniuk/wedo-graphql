@@ -16,22 +16,18 @@ export const AlgoliaResolver = {
       const algIndex: SearchIndex = algClient.initIndex(collection);
 
       return await tryCatchWithApolloErrorAsync(async () => {
-        const searchResults = algIndex.search(query, {
-          page: page,
-          hitsPerPage: hitsPerPage,
-          filters: filters
-        })
+          const searchResults = await algIndex.search(query, {
+            page: page,
+            hitsPerPage: hitsPerPage,
+            filters: filters
+          })
 
-        return (await searchResults).hits as unknown as SearchItem[]
+        return { 
+          total: searchResults.nbHits,
+          hits: searchResults.hits as unknown as SearchItem[]
+        }
       })
     }
   },
   Mutation: {},
-  ItemType: {
-    __resolveType(obj) {
-      if(obj.objectID && obj.category){
-        return 'CompanyPreview';
-      }
-    }
-  }
 }
