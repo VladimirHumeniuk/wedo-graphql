@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/lib
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -52,4 +53,4 @@ service-account.json
 
 # next.js build output
 .next
-/lib
+
