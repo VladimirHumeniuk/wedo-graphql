@@ -5,7 +5,7 @@ export const typeDefs = gql`
     getAllUsers(lastVisible: Int, limit: Int): [User]
     getUser(uid: String!): User
 
-    indexSearch(collection: String!, query: String, filters: String, page: Int): [SearchItem]
+    indexSearch(collection: String!, query: String, filters: String, page: Int, hitsPerPage: Int): SearchResult
 
     getAllCompanies: [Company]
     getCompany(cid: String): Company
@@ -194,5 +194,10 @@ export const typeDefs = gql`
   }
 
   # Search Results
+  type SearchResult {
+    total: Int!
+    hits: [SearchItem]
+  }
+  
   union SearchItem = CompanyPreview
 `;
