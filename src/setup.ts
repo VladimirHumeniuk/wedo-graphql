@@ -1,6 +1,6 @@
 
 import * as admin from 'firebase-admin';
-import algoliasearch, { SearchClient } from 'algoliasearch/lite';
+import algoliasearch, { SearchClient } from 'algoliasearch';
 
 const dotenv = require('dotenv').config();
 const serviceAccount = require('../service-account.json');

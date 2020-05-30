@@ -8,10 +8,10 @@ export const AlgoliaResolver = {
   Query: {
     async indexSearch(_: null, {
       collection,
-      hitsPerPage,
       query = '',
-      filters = undefined,
-      page = 0
+      hitsPerPage,
+      page = 0,
+      filters = undefined
     }) {
       const algIndex: SearchIndex = algClient.initIndex(collection);
 
@@ -22,7 +22,7 @@ export const AlgoliaResolver = {
             filters: filters
           })
 
-        return { 
+        return {
           total: searchResults.nbHits,
           hits: searchResults.hits as unknown as SearchItem[]
         }
