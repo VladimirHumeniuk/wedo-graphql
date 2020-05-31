@@ -1,3 +1,4 @@
+import { QueryPayloadInput } from './../../models/inputs/Query.payload';
 import { tryCatchWithApolloErrorAsync } from '../../helpers/error-handler.helper';
 import { CommentService } from './Comment.service';
 
@@ -5,9 +6,9 @@ export const CommentResolver = new class {
   private readonly commentService: CommentService = new CommentService();
 
   Query = {
-    getCompanyComments: async (_: null, { cid }) => {
+    getCompanyComments: async (_: null, { cid, query = {} }) => {
       return await tryCatchWithApolloErrorAsync(async () => {
-        return this.commentService.getAllEntities(cid);
+        return this.commentService.getAllEntities(cid, query);
       });
     }
   };
