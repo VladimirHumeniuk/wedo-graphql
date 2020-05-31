@@ -95,7 +95,7 @@ export const typeDefs = gql`
     image: String
     category: Int!
     shortDescription: String!
-    rating: Int
+    rating: Float
   }
 
   # Comments
@@ -105,7 +105,7 @@ export const typeDefs = gql`
     text: String
     author: CommentAuthor
     isEdited: Boolean
-    rating: Int
+    rating: Float
     answer: Answer
     votes: [Vote]
   }
