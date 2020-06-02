@@ -20,7 +20,7 @@ export class CommentService {
 
     const query = queryPayload.order
         ? queryEnitites.orderBy(queryPayload.order.fieldName, queryPayload.order.direction)
-        : queryEnitites.orderBy("date", "desc");
+        : queryEnitites.orderBy('date', 'desc');
 
     const commentsSnapshots = await query.get();
     const comments = commentsSnapshots.docs.map(comment => comment.data()) as Comment[];
