@@ -23,7 +23,7 @@ export const typeDefs = gql`
     getAllCategories: [Category]
     getCategory(id: Int): Category
 
-    getCompanyComments(cid: String!): [Comment]
+    getCompanyComments(cid: String!, query: QueryPayloadInput): [Comment]
     getCompanyStars(cid: String!): [Star]
     getUserStars(uid: String!): [Star]
   }
@@ -203,6 +203,17 @@ export const typeDefs = gql`
   type SearchResult {
     total: Int!
     hits: [SearchItem]
+  }
+
+  # QueryPayload 
+  input QueryPayloadInput {
+      order: OrderPayloadInput
+  }
+
+  # OrderPayloadInput
+  input OrderPayloadInput {
+      fieldName: String!
+      direction: String!
   }
 
   union SearchItem = CompanyPreview

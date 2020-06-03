@@ -7,6 +7,7 @@ import { VoteService } from '../vote/Vote.service';
 import { Comment } from './Comment';
 import { ValidationError } from 'apollo-server';
 import { ObjectHelper } from '../../helpers/object.helper';
+import { OrderPayloadInput, QueryPayloadInput } from '../../models/inputs/Query.payload';
 
 @Singleton
 export class CommentService {
@@ -14,8 +15,12 @@ export class CommentService {
   private readonly commentRepository: CommentRepository = new CommentRepository();
   private readonly voteService: VoteService = new VoteService();
 
-  async getAllEntities(companyId: string): Promise<Comment[]> {
-    const query = this.commentRepository.getAllEntities(companyId);
+  async getAllEntities(companyId: string, queryPayload: QueryPayloadInput): Promise<Comment[]> {
+    const queryEnitites = this.commentRepository.getAllEntities(companyId);
+
+    const query = queryPayload.order
+        ? queryEnitites.orderBy(queryPayload.order.fieldName, queryPayload.order.direction)
+        : queryEnitites.orderBy('date', 'desc');
 
     const commentsSnapshots = await query.get();
     const comments = commentsSnapshots.docs.map(comment => comment.data()) as Comment[];
@@ -25,7 +30,6 @@ export class CommentService {
       comment.votes = votes;
     }
 
-    comments.sort(this.sortCommentsByPositiveVotes);
     return comments;
   }
 
