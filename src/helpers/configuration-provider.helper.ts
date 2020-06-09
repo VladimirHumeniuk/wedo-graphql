@@ -7,6 +7,7 @@ class Configuration {
     comments: 'comments',
     votes: 'votes',
     stars: 'stars',
+    counters: 'counters'
   }
 }
 

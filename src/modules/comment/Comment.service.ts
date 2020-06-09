@@ -67,18 +67,17 @@ export class CommentService {
     return true;
   }
 
-    async removeComment(companyId: string, commentId: string): Promise<boolean | ValidationError> {
-        const query = this.commentRepository.getEnitity(companyId, commentId);
-        const commentInDb = query.get();
+  async removeComment(companyId: string, commentId: string): Promise<boolean | ValidationError> {
+      const query = this.commentRepository.getEnitity(companyId, commentId);
+      const commentInDb = query.get();
 
-        if (!commentInDb) {
-            return new ValidationError(`Comment with ID:[${commentId}] is not found`);
-        }
+      if (!commentInDb) {
+          return new ValidationError(`Comment with ID:[${commentId}] is not found`);
+      }
 
-        await query.delete();
-        return true;
-    }
-
+      await query.delete();
+      return true;
+  }
 
   private sortCommentsByPositiveVotes(a: Comment, b: Comment) {
     const positiveVotesA = a.votes.filter(vote => vote.value === true);
