@@ -21,6 +21,7 @@ export const typeDefs = gql`
     getAlerts(uid: String!): [Alert]
 
     getAllCategories: [Category]
+    getPopular: [Popular]
     getCategory(id: Int): Category
 
     getCompanyComments(cid: String!, query: QueryPayloadInput): [Comment]
@@ -181,6 +182,11 @@ export const typeDefs = gql`
     title: String
   }
 
+  type Popular {
+    id: Int
+    amount: Int
+  }
+
   input CategoryInput {
     id: Int!
     title: String!
@@ -205,7 +211,7 @@ export const typeDefs = gql`
     hits: [SearchItem]
   }
 
-  # QueryPayload 
+  # QueryPayload
   input QueryPayloadInput {
       order: OrderPayloadInput
   }
